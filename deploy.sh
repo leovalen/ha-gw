@@ -9,11 +9,11 @@ elif [ $1 == "staging" ]
         if [[ -z $2 ]]
             then
                 echo "Running dry-run"
-                /opt/local/bin/rsync --dry-run -az --force --delete --chown=www:www --exclude=".*" -e "ssh -p22" ./ root@el.stallen.xyz:/home/pi/ha-gw
+                /opt/local/bin/rsync --dry-run -az --force --delete --chown=pi:pi --exclude=".*" -e "ssh -p22" ./ pi@hagw1.stallen.xyz:/home/pi/ha-gw
         elif [ $2 == "go" ]
             then
                 echo "Running actual deploy"
-                /opt/local/bin/rsync -az --force --delete  --chown=www:www --exclude=".*" ./ root@el.stallen.xyz:/home/pi/ha-gw
+                /opt/local/bin/rsync -az --force --delete  --chown=pi:pi --exclude=".*" ./ pi@hagw1.stallen.xyz:/home/pi/ha-gw
         else
             echo $ERRORSTRING;
         fi
@@ -22,11 +22,11 @@ elif [ $1 == "production" ]
         if [[ -z $2 ]]
             then
                 echo "Running dry-run"
-                /opt/local/bin/rsync --dry-run -az --force --delete --chown=www:www --exclude=".*" -e "ssh -p22" ./ root@tjenester.fagforbundet.no:/srv/www/tjenester.fagforbundet.no
+                /opt/local/bin/rsync --dry-run -az --force --delete --chown=pi:pi --exclude=".*" -e "ssh -p22" ./ pi@hagw1.stallen.xyz:/home/pi/ha-gw
         elif [ $2 == "go" ]
             then
                 echo "Running actual deploy"
-                /opt/local/bin/rsync -az --force --delete  --chown=www:www --exclude=".*" ./ root@tjenester.fagforbundet.no:/srv/www/tjenester.fagforbundet.no
+                /opt/local/bin/rsync -az --force --delete  --chown=pi:pi --exclude=".*" ./ pi@hagw1.stallen.xyz:/home/pi/ha-gw
         else
             echo $ERRORSTRING;
         fi

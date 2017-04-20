@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Device;
 use Illuminate\Console\Command;
 
 class TellstickScanDevices extends Command
@@ -22,8 +23,6 @@ class TellstickScanDevices extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -37,6 +36,20 @@ class TellstickScanDevices extends Command
      */
     public function handle()
     {
+        $output = [];
+        exec("tdtool --list-devices", $output);
 
+        $devices = [];
+        foreach ($output as $line)
+        {
+            $line = str_replace("\t", "&", $line);
+            parse_str($line, $device);
+            $devices[] = $device;
+        }
+        $devices = collect($devices);
+
+        $devices->each(function($device) {
+            Device::updateOrCreate(['id' => $device['id']], $device);
+        });
     }
 }

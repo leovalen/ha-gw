@@ -15,6 +15,9 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\HandleTellstickEvent::class,
         Commands\TellstickSubscribe::class,
+        Commands\TellstickScanDevices::class,
+        Commands\TurnOnDevice::class,
+        Commands\TurnOffDevice::class,
     ];
 
     /**
@@ -25,8 +28,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('tellstick:scan')->everyMinute();
+
+        // Turn on and off espresson machine in the morning
+        $schedule->command('device:on 5')
+            ->weekdays()
+            ->dailyAt('23:21');
+
+        $schedule->command('device:on 5')
+            ->weekdays()
+            ->dailyAt('07:30');
+
+        $schedule->command('device:off 5')
+            ->weekdays()
+            ->dailyAt('08:30');
+
+
     }
 
     /**

@@ -86,8 +86,6 @@ class TellstickSubscribe extends Command
                 'value' => $data->value,
                 'timestamp' => $data->timestamp,
             ]);
-
-
         });
     }
 }

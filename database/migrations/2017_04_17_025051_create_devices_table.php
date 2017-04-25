@@ -19,6 +19,8 @@ class CreateDevicesTable extends Migration
             $table->string('name');
             $table->string('lastsentcommand')->nullable();
             $table->unsignedTinyInteger('dimlevel')->nullable();
+            $table->unsignedTinyInteger('dim_max')->nullable();
+            $table->unsignedTinyInteger('dim_min')->nullable();
             $table->timestamps();
         });
     }

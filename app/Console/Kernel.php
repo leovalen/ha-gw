@@ -30,11 +30,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('tellstick:scan')->everyMinute();
 
-        // Turn on and off espresson machine in the morning
-        $schedule->command('device:on 5')
-            ->weekdays()
-            ->dailyAt('23:21');
-
+        // Espresso machine should be on in the morning
         $schedule->command('device:on 5')
             ->weekdays()
             ->dailyAt('07:30');
@@ -42,8 +38,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('device:off 5')
             ->weekdays()
             ->dailyAt('08:30');
-
-
     }
 
     /**
